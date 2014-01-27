@@ -97,3 +97,7 @@ Get a headshot of John Gapper at 50x50 in auto-detected image format:
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
 	http://<host>ftcms/48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66?opformat=jpg&opmode=data-utfhack
+
+## Restricting use to FT sites
+
+Image requests must contain a `Referrer` header with a recognised FT site hostname.
