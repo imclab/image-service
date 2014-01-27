@@ -104,11 +104,11 @@ Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
-	http://<host>/v1/images?sourcetype=ftcms&ids=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&opformat=jpg&opmode=data-utfhack
+	http://<host>/v1/images?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&opformat=jpg&opmode=data-utfhack
 
 Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs in JSON array in one request
 
-    http://<host>/v1/images?opmode=datacropmode=cover&ids=imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
+    http://<host>/v1/images?opmode=datacropmode=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
 
 ## Restricting use to FT sites
 
