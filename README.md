@@ -8,7 +8,7 @@ Image resizing proxy for FT responsive images.
 
 API endpoints as follows:
 
-### GET /v1/`:sourcetype`/`:sourcepaths`
+### GET /v1/images/`:sourcetype`/`:sourcepaths`
 
 Fetch an image or set of images, format and serve them.
 
@@ -30,7 +30,7 @@ Fetch an image or set of images, format and serve them.
 		</ul>
 	</td>
   </tr><tr>
-    <td><code>:sourcepaths</code>*</td>
+    <td><code>:sourcepaths</code></td>
     <td>URL</td>
     <td>Comma-separated list of URL encoded identifers that make sense in the context of the sourcetype</td>
   </tr><tr>
