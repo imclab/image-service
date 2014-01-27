@@ -113,3 +113,8 @@ Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs
 ## Restricting use to FT sites
 
 Image requests must contain a `Referer` header with a recognised FT site hostname.
+
+## Unresolved questions
+
+* Art direction!
+* Invocation in markup
