@@ -19,7 +19,7 @@ Fetch an image or set of images, format and serve them.
     <td><code>:sourcetype</code></td>
     <td>URL</td>
     <td>
-	    Type of source.  <code>sourcepath</code> is a list of URL encoded, comma delimited identifiers that make sense in this namespace.Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
+	    Type of source.  <code>sourcepaths</code> is a list of URL encoded, comma delimited identifiers that make sense in this namespace.Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
 	    <ul>
 	    	<li><strong>http</strong>: HTTP URLs of source images anywhere on the public web</li>
 	    	<li><strong>https</strong>: HTTPs URLs of source images anywhere on the public web</li>
@@ -96,7 +96,7 @@ Get a headshot of John Gapper at 50x50 in auto-detected image format:
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
-	http://<host>ftcms/48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66?opformat=jpg&opmode=data-utfhack
+	http://<host>/ftcms/48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66?opformat=jpg&opmode=data-utfhack
 
 ## Restricting use to FT sites
 
