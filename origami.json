@@ -1,0 +1,7 @@
+{
+  "description": "Responsive images service",
+  "origamiType": "service",
+  "origamiVersion": 1,
+  "support": "https://github.com/Financial-Times/image-service/issues",
+  "supportStatus": "not implemented"
+}
