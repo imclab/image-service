@@ -8,7 +8,7 @@ Image resizing proxy for FT responsive images.
 
 API endpoints as follows:
 
-### GET /v1/images/
+### GET /v1/images/`:sourcetype`/`:id`
 
 Fetch an image or set of images, format and serve them.
 
@@ -17,7 +17,7 @@ Fetch an image or set of images, format and serve them.
     <th>Param</th><th>Where</th><th>Description</th>
   </tr><tr>
     <td><code>sourcetype</code></td>
-    <td>Querystring</td>
+    <td>Querystring or URL</td>
     <td>
 	    Type of source.  <code>imageset</code> is a list of URL encoded, comma delimited identifiers that make sense in the <code>sourcetype</code> namespace.  Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
 	    <ul>
@@ -25,13 +25,14 @@ Fetch an image or set of images, format and serve them.
 	    	<li><strong>https</strong>: HTTPs URLs of source images anywhere on the public web</li>
 	    	<li><strong>flags</strong>: ISO 3166 two letter country codes</li>
 	    	<li><strong>heads</strong>: Slugified names of known FT columnists and others for whom we show headshots</li>
-	    	<li><strong>icons</strong>: Identifiers for icons within standard FT icon set</li>
+            <li><strong>icons</strong>: Identifiers for icons within standard FT icon set</li>
+            <li><strong>social</strong>: Identifiers for button images representing common social platforms (eg facebook, twitter, linkedin, reddit, tumblr, digg, weibo, douban, googleplus)</li>
 	    	<li><strong>ftcms</strong>: UUID of image in Content API *(Problem: can't currently look up an image)*</li>
 		</ul>
 	</td>
   </tr><tr>
     <td><code>id</code></td>
-    <td>Querystring</td>
+    <td>Querystring or URL</td>
     <td>A comma-separated list of URL encoded identifers that make sense in the context of the `sourcetype`.  Alternative to `imageset`.</td>
   </tr><tr>
     <td><code>imageset</code></td>
@@ -100,7 +101,7 @@ Fetch flags of European countries at 40x30px as a CSS sprite
 
 Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
-	http://<host>/v1/images?sourcetype=heads&id=john.gapper&width=50
+	http://<host>/v1/images/heads/john.gapper?width=50
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
