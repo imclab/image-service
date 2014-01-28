@@ -16,7 +16,7 @@ Fetch an image or set of images, format and serve them.
   <tr>
     <th>Param</th><th>Where</th><th>Description</th>
   </tr><tr>
-    <td><code>:sourcetype</code></td>
+    <td><code>sourcetype</code></td>
     <td>Querystring</td>
     <td>
 	    Type of source.  <code>imageset</code> is a list of URL encoded, comma delimited identifiers that make sense in the <code>sourcetype</code> namespace.  Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
