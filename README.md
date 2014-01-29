@@ -17,7 +17,7 @@ Fetch an image or set of images, format and serve them.
     <th>Param</th><th>Where</th><th>Description</th>
   </tr><tr>
     <td><code>sourcetype</code></td>
-    <td>Querystring or URL</td>
+    <td>Querystring, URL, imageset</td>
     <td>
 	    Type of source.  <code>imageset</code> is a list of URL encoded, comma delimited identifiers that make sense in the <code>sourcetype</code> namespace.  Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
 	    <ul>
@@ -32,7 +32,7 @@ Fetch an image or set of images, format and serve them.
 	</td>
   </tr><tr>
     <td><code>id</code></td>
-    <td>Querystring or URL</td>
+    <td>Querystring, URL, imageset</td>
     <td>A comma-separated list of URL encoded identifers that make sense in the context of the `sourcetype`.  Alternative to `imageset`.</td>
   </tr><tr>
     <td><code>imageset</code></td>
@@ -40,15 +40,15 @@ Fetch an image or set of images, format and serve them.
     <td>A JSON array of JSON objects in which each object has a required `id` property along with (optionally) any of the other properties defined on this API except `opmode` (which must have a single value that applies to the whole request).  Any property not defined for an individual image will revert to the value defined for the request (and then to the default, if not defined on the query string).  Alternative to `id`.</td>
   </tr><tr>
     <td><code>width</code></td>
-    <td>Querystring</td>
+    <td>Querystring, imageset</td>
     <td>Width of desired output image in pixels.  Defaults to a width that maintains the aspect of the image, or the width of the source image if `height` is also not set.</td>
   </tr><tr>
     <td><code>height</code></td>
-    <td>Querystring</td>
+    <td>Querystring, imageset</td>
     <td>Height of desired output image in pixels.  Defaults to a height that maintains the aspect of the image, or the height of the source image if `width` is also not set.</td>
   </tr><tr>
     <td><code>cropmode</code></td>
-    <td>Querystring</td>
+    <td>Querystring, imageset</td>
     <td>
     	Type of transform to apply if the source aspect ratio does not perfectly match the target (subset of rules defined by CSS <code>background-size</code> property):
     	<ul>
@@ -59,7 +59,7 @@ Fetch an image or set of images, format and serve them.
     </td>
   </tr><tr>
     <td><code>opformat</code></td>
-    <td>Querystring</td>
+    <td>Querystring, imageset</td>
     <td>
     	Desired output format.
     	<ul>
@@ -71,9 +71,9 @@ Fetch an image or set of images, format and serve them.
     	</ul>
     </td>
   </tr><tr>
-    <td><code>compression</code></td>
-    <td>Querystring</td>
-    <td>Compression level for lossy encoding  (1-100). Leave blank or set to 0 for lossless (if lossless is not supported by chosen image format, the lowest possible compression level will be used instead)</td>
+    <td><code>quality</code></td>
+    <td>Querystring, imageset</td>
+    <td>Compression level for lossy encoding.  May be set to 'lowest', 'low', 'medium', 'high', 'highest', or 'lossless'. If lossless is not supported by chosen image format (JPG), the highest level will be used instead.  Default is medium.</td>
   </tr><tr>
     <td><code>opmode</code></td>
     <td>Querystring</td>
