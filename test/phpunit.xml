@@ -32,8 +32,8 @@
 		<ini name="error_log" value="../build/logs/error.log" />
 	</php>
 	<testsuites>
-		<testsuite name="Sample Test">
-			<file>FTLabsStandardPHP/ComplimentGeneratorTest.php</file>
+		<testsuite name="Tests">
+			<directory>.</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

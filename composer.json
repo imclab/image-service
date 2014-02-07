@@ -1,27 +1,17 @@
 {
-	"name": "ftlabs/ftlabs-standard-php",
+	"name": "img/responsive-image-proxy",
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "http://git.ak.ft.com/ftlabs/ipchecker.git"
-		},
-		{
-			"type": "vcs",
 			"url":  "http://git.ak.ft.com/ftlabs/migrations.git"
-		},
-		{
-			"type": "vcs",
-			"url":  "http://git.ak.ft.com/ftlabs/daemon.git"
 		}
 	],
 	"require": {
-		"ftlabs/ipchecker": "1.0.*",
-		"ftlabs/migrations": "dev-master",
-		"ftlabs/daemon": "2.*"
+		"ftlabs/migrations": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
-			"FTLabsStandardPHP\\": "app/"
+			"FTLabs\\": "app/"
 		}
 	}
 }

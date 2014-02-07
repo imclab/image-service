@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="test" basedir="." default="build">
 
-	<property name="projectname" value="FTLabs standard PHP project" />
+	<property name="projectname" value="Responsive Image Proxy" />
 	<property name="ws" value="." />
 	<property name="builddir" value="${ws}/build" />
 
@@ -39,7 +39,7 @@
 
  		<echo msg="Setting up sandbox..." />
  		<phingcall target="installdependencies" />
-		<exec passthru="true" command='${ws}/vendor/ftlabs/migrations/bin/DbMigrate --migrations=./_buildconf/migrations --dbname="ftlabs-standard-php" --dbhostname=dbmaster --username=test --password=test --pdo=mysql:host=dbmaster' />
+		<exec passthru="true" command='${ws}/vendor/ftlabs/migrations/bin/DbMigrate --migrations=./_buildconf/migrations --dbname="imageproxy" --dbhostname=dbmaster --username=test --password=test --pdo=mysql:host=dbmaster' />
  	</target>
 
 	<target name="prepare">

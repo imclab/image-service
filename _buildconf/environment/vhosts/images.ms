@@ -1,9 +1,9 @@
 <VirtualHost *:80>
   DocumentRoot {{{path}}}/html
-  ServerName ftlabs-standard-php.labs.ft.com
-  ServerAlias {{{devinitials}}}.sandboxes.ftlabs-standard-php.labs.ft.com
-  ServerAlias v{{{major_version}}}.uat.ftlabs-standard-php.labs.ft.com
-  ServerAlias *.ci.ftlabs-standard-php.labs.ft.com
+  ServerName images.labs.ft.com
+  ServerAlias {{{devinitials}}}.sandboxes.images.labs.ft.com
+  ServerAlias v{{{major_version}}}.uat.images.labs.ft.com
+  ServerAlias *.ci.images.labs.ft.com
 
   <Directory {{{path}}}/html>
     RewriteEngine On
