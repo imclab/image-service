@@ -54,9 +54,14 @@ Fetch an image or set of images, format and serve them.
     	<ul>
     		<li><strong>cover</strong> (default): The image should be scaled to be as small as possible while ensuring both its dimensions are greater than or equal to the corresponding dimensions of the frame, and any cropping should be taken equally from both ends of the overflowing dimension</li>
     		<li><strong>fit</strong>: The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame.  Any space in the frame not occupied by the image should be transparent.</li>
+            <li><strong>constrain</strong>: The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame.  The frame should then be collapsed to match the aspect ratio of the image.</li>
     		<li><strong>stretch</strong>: The image should be scaled so that both its dimensions exactly match the frame, regardless of its original aspect ratio.</li>
     	</ul>
     </td>
+  </tr><tr>
+    <td><code>bgcolor</code></td>
+    <td>Querystring, imageset</td>
+    <td>Background colour to apply to regions of images that would be transparent where the output image format does not support transparency (ie, JPEG).  Specified as six-character RGB hex code, eg `00ff00`</td>
   </tr><tr>
     <td><code>opformat</code></td>
     <td>Querystring, imageset</td>
