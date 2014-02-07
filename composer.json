@@ -1,0 +1,27 @@
+{
+	"name": "ftlabs/ftlabs-standard-php",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "http://git.ak.ft.com/ftlabs/ipchecker.git"
+		},
+		{
+			"type": "vcs",
+			"url":  "http://git.ak.ft.com/ftlabs/migrations.git"
+		},
+		{
+			"type": "vcs",
+			"url":  "http://git.ak.ft.com/ftlabs/daemon.git"
+		}
+	],
+	"require": {
+		"ftlabs/ipchecker": "1.0.*",
+		"ftlabs/migrations": "dev-master",
+		"ftlabs/daemon": "2.*"
+	},
+	"autoload": {
+		"psr-0": {
+			"FTLabsStandardPHP\\": "app/"
+		}
+	}
+}

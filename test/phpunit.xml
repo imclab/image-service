@@ -1,0 +1,39 @@
+<phpunit
+	bootstrap="bootstrap.php"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	processIsolation="false"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false"
+	syntaxCheck="true"
+	strict="false"
+	verbose="true">
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../</directory>
+			<exclude>
+				<directory suffix=".php">../vendor</directory>
+				<directory suffix=".php">../build</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="junit" target="../build/logs/phpunit.xml" />
+		<log type="coverage-clover" target="../build/logs/coverage/clover.xml" />
+		<log type="coverage-html" target="../build/logs/coverage/" charset="UTF-8" />
+	</logging>
+	<php>
+		<includePath>.</includePath>
+		<ini name="memory_limit" value="256M" />
+		<ini name="error_log" value="../build/logs/error.log" />
+	</php>
+	<testsuites>
+		<testsuite name="Sample Test">
+			<file>FTLabsStandardPHP/ComplimentGeneratorTest.php</file>
+		</testsuite>
+	</testsuites>
+</phpunit>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="test" basedir="." default="build">
+
+	<property name="projectname" value="FTLabs standard PHP project" />
+	<property name="ws" value="." />
+	<property name="builddir" value="${ws}/build" />
+
+	<property name="phpunit_command" value="phpunit" />
+	<available file="/etc/php-debugging/php.ini" property="phpunit_command" value="php -c /etc/php-debugging/php.ini /usr/bin/phpunit" />
+
+	<target name="build">
+		<phingcall target="clean" />
+		<phingcall target="prepare" />
+		<phingcall target="copy" />
+	</target>
+
+	<target name="ci">
+		<phingcall target="test" />
+		<phingcall target="generatedocs" />
+	</target>
+
+	<target name="clean">
+		<echo msg="Clean..." />
+		<delete dir="${builddir}" />
+		<phingcall target="deletedependencies" />
+	</target>
+
+	<target name="test">
+		<echo msg="Running PHPUnit" />
+		<exec passthru="true" dir="${ws}/test" command="${phpunit_command}" checkreturn="true" />
+	</target>
+
+	<!-- Setup for dev sandboxes -->
+ 	<target name="devbuild">
+
+ 		<exec dir="${ws}" command="dev-deploy-vhost" />
+		<!-- dev-deploy-vhost messes up shell, so do a hacky reset -->
+ 		<php expression="`reset`" />
+
+ 		<echo msg="Setting up sandbox..." />
+ 		<phingcall target="installdependencies" />
+		<exec passthru="true" command='${ws}/vendor/ftlabs/migrations/bin/DbMigrate --migrations=./_buildconf/migrations --dbname="ftlabs-standard-php" --dbhostname=dbmaster --username=test --password=test --pdo=mysql:host=dbmaster' />
+ 	</target>
+
+	<target name="prepare">
+		<echo msg="Prepare..." />
+		<mkdir dir="${builddir}" />
+		<mkdir dir="${builddir}/logs" />
+		<mkdir dir="${builddir}/logs/coverage" />
+		<mkdir dir="${builddir}/docs" />
+		<phingcall target="installdependencies" />
+	</target>
+
+    <target name="installdependencies">
+		<exec dir="${ws}" passthru="true" command="composer install --optimize-autoloader" checkreturn="true" />
+    </target>
+
+    <target name="deletedependencies">
+		<delete dir="${ws}/vendor" />
+    </target>
+
+	<target name="copy">
+		<echo msg="Copying app" />
+		<copy todir="${builddir}/src/" >
+
+			<!-- Configure tokens to be replaced -->
+			<filterchain>
+				<replacetokens begintoken="@@" endtoken="@@">
+					<token key="deploy_module" value="${deploy_module}" />
+					<token key="deploy_time" value="${deploy_time}" />
+					<token key="deploy_version" value="${deploy_version}" />
+				</replacetokens>
+			</filterchain>
+
+			<!-- Define files to copy -->
+			<fileset dir="${ws}">
+				<include name="**/*" />
+				<exclude name="tmp/" />
+				<exclude name="build/" />
+				<exclude name="test/" />
+				<exclude name="build.xml" />
+				<exclude name="README*" />
+				<exclude name="composer.*" />
+			</fileset>
+		</copy>
+
+		<!-- add a project-specific directory for temporary files -->
+		<mkdir dir="${builddir}/src/tmp" />
+
+		<echo msg="Done copying app" />
+	</target>
+
+	<target name="generatedocs">
+		<echo msg="PHP Docs..." />
+		<exec command="phpdoc run --extensions='*' --ignore='*.html,*.js,*.log' --title=${projectname} -d ${ws}/app -t ${builddir}/docs" escape="false" />
+	</target>
+
+</project>
