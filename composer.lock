@@ -1,0 +1,71 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "c5af9a6b7489cee50c752a41f3d04b7f",
+    "packages": [
+        {
+            "name": "ftlabs/exception",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "http://git.ak.ft.com/ftlabs/exception.git",
+                "reference": "5bd57546579c6afd938b0de509fcd65aa818b90e"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "description": "A namespaced Exception with context support",
+            "time": "2013-12-02 17:33:37"
+        },
+        {
+            "name": "ftlabs/migrations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "http://git.ak.ft.com/ftlabs/migrations.git",
+                "reference": "589a8053464c81caac5dc61a4c2d530b51ca3b9c"
+            },
+            "bin": [
+                "bin/DbMigrate"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "license": [
+                "Proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Sam",
+                    "email": "samuel.giles@ft.com"
+                }
+            ],
+            "description": "SQL Database migrations for PHP",
+            "time": "2013-10-22 16:32:59"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "ftlabs/migrations": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

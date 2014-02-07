@@ -4,10 +4,15 @@
 		{
 			"type": "vcs",
 			"url":  "http://git.ak.ft.com/ftlabs/migrations.git"
+		},
+		{
+			"type": "vcs",
+			"url":  "http://git.ak.ft.com/ftlabs/exception.git"
 		}
 	],
 	"require": {
-		"ftlabs/migrations": "dev-master"
+		"ftlabs/migrations": "dev-master",
+		"ftlabs/exception": "*"
 	},
 	"autoload": {
 		"psr-0": {
