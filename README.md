@@ -95,8 +95,6 @@ Fetch an image or set of images, format and serve them.
   </tr>
 </table>
 
-If both `imageset` and `id` are defined, `id` is ignored.
-
 The service stores cached copies of images as retrieved from origin.  Cached copies of transformed images are cached by CDN.
 
 ## Examples
