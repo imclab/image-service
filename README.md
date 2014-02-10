@@ -63,17 +63,17 @@ Fetch an image or set of images, format and serve them.
     <td>Querystring, imageset</td>
     <td>Background colour to apply to regions of images that would be transparent where the output image format does not support transparency (ie, JPEG).  Specified as six-character RGB hex code, eg `00ff00`</td>
   </tr><tr>
-    <td><code>opformat</code></td>
+    <td><code>format</code></td>
     <td>Querystring, imageset</td>
     <td>
     	Desired output format.
-    	<ul>
-    		<li><strong>auto</strong> (default): Use <code>Accept</code> header from request to determine the best output format</li>
-    		<li><strong>jpg</strong>: Format images as jpg</li>
-    		<li><strong>png</strong>: Format images as png</li>
-    		<li><strong>webp</strong>: Format images as webp</li>
-    		<li><strong>svg</strong>: Format images as SVG (only available if source image is SVG)</li>
-    	</ul>
+    	<dl>
+    		<dt>auto (default)</dt><dd>Use <code>Accept</code> header from request to determine the best output format</dd>
+    		<dt>jpg</dt><dd> Format images as jpg</dd>
+    		<dt>png</dt><dd> Format images as png</dd>
+    		<dt>webp</dt><dd> Format images as webp</dd>
+    		<dt>svg</dt><dd> Format images as SVG (only available if source image is SVG)</dd>
+    	</dl>
     </td>
   </tr><tr>
     <td><code>quality</code></td>
@@ -85,7 +85,7 @@ Fetch an image or set of images, format and serve them.
     <td>
     	How output should be packaged.
     	<ul>
-    		<li><strong>raw</strong> (default): Output raw image data.  Requests for multiple images must will be output as a sprite in which the images are tiled in a single horizontal line. Per-image `opformat` override not available for this output mode (because you can't output an image that is part PNG, part JPEG!)</li>
+    		<li><strong>raw</strong> (default): Output raw image data.  Requests for multiple images must will be output as a sprite in which the images are tiled in a single horizontal line. Per-image `format` override not available for this output mode (because you can't output an image that is part PNG, part JPEG!)</li>
     		<li><strong>css-sprite</strong>: Output a CSS spritesheet containing the images as data URIs attached to classes with names matching the input identifiers (as closely as possible)</li>
     		<li><strong>data</strong>: Output a JSON array of data URIs</li>
     		<li><strong>data-utfhack</strong>: Output a JSON array of data URIs, in which each character of the base64 is a UTF character hiding two ASCII characters</li>
@@ -102,7 +102,7 @@ The service stores cached copies of images as retrieved from origin.  Cached cop
 
 Fetch flags of European countries at 40x30px as a CSS sprite
 
-    http://<host>/v1/images?opmode=css-sprite&opformat=png&width=40&height=30&sourcetype=flags&id=gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se
+    http://<host>/v1/images?opmode=css-sprite&format=png&width=40&height=30&sourcetype=flags&id=gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se
 
 Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
@@ -110,7 +110,7 @@ Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
-	http://<host>/v1/images?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&opformat=jpg&opmode=data-utfhack
+	http://<host>/v1/images?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&format=jpg&opmode=data-utfhack
 
 Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs in JSON array in one request
 
