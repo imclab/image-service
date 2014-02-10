@@ -8,7 +8,8 @@ Image resizing proxy for FT responsive images.
 
 API endpoints as follows:
 
-### GET /v1/images/`:mode`
+### GET /v1/images/`:mode`/`:uri`,`:uri`,… <br> GET /v1/images/`:mode`?imageset=`:imageset`
+
 
 Fetch an image or set of images, format and serve them.
 
@@ -28,28 +29,28 @@ Fetch an image or set of images, format and serve them.
         </dl>
     </td>
   </tr><tr>
-    <td><code>sourcetype</code></td>
-    <td>Querystring, imageset</td>
-    <td>
-	    Type of source.  <code>imageset</code> is a list of URL encoded, comma delimited identifiers that make sense in the <code>sourcetype</code> namespace.  Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
-	    <ul>
-	    	<li><strong>http</strong>: HTTP URLs of source images anywhere on the public web</li>
-	    	<li><strong>https</strong>: HTTPs URLs of source images anywhere on the public web</li>
-	    	<li><strong>flags</strong>: ISO 3166 two letter country codes</li>
-	    	<li><strong>heads</strong>: Slugified names of known FT columnists and others for whom we show headshots</li>
-            <li><strong>icons</strong>: Identifiers for icons within standard FT icon set</li>
-            <li><strong>social</strong>: Identifiers for button images representing common social platforms (eg facebook, twitter, linkedin, reddit, tumblr, digg, weibo, douban, googleplus)</li>
-	    	<li><strong>ftcms</strong>: UUID of image in Content API *(Problem: can't currently look up an image)*</li>
-		</ul>
-	</td>
+    <td><code>uri</code></td>
+    <td>URL, imageset</td>
+    <td>An URL-encoded URI to use as the image source, e.g. <code>/v1/images/raw/flags:gb,http%3A%2F%2Fexample.com%2Fimage%2Ejpg</code>. Scheme part of the URI may be omitted if the <code>source</code> property is provided. Alternative to the <code>imageset</code> property.</td>
   </tr><tr>
-    <td><code>id</code></td>
-    <td>A comma-separated list of URL encoded identifers that make sense in the context of the `sourcetype`.  Alternative to `imageset`.</td>
-    <td>A comma-separated list of URL encoded identifers that make sense in the context of the `source`.  Alternative to `imageset`.</td>
+    <td><code>source</code></td>
+    <td>Querystring</td>
+    <td>
+	    Default type of source/scheme in <code>uri</code>s. Custom schemes allow the service to back onto a variety of data sources, including sets of images that may be built into the service itself. Supported source types:
+	    <dl>
+	    	<dt>http</dt><dd> HTTP URLs of source images anywhere on the public web</dd>
+	    	<dt>https</dt><dd> HTTPS URLs of source images anywhere on the public web</dd>
+	    	<dt>flags</dt><dd> ISO 3166 two letter country codes</dd>
+	    	<dt>heads</dt><dd> Slugified names of known FT columnists and others for whom we show headshots</dd>
+            <dt>icons</dt><dd> Identifiers for icons within standard FT icon set</dd>
+            <dt>social</dt><dd> Identifiers for button images representing common social platforms (e.g. facebook, twitter, linkedin, reddit, tumblr, digg, weibo, douban, googleplus)</dd>
+	    	<dt>ftcms</dt><dd> UUID of image in Content API *(Problem: can't currently look up an image)*</dd>
+		</dl>
+	</td>
   </tr><tr>
     <td><code>imageset</code></td>
     <td>Querystring</td>
-    <td>A JSON array of JSON objects in which each object has a required `id` property along with (optionally) any of the other properties defined on this API except `mode` (which must have a single value that applies to the whole request).  Any property not defined for an individual image will revert to the value defined for the request (and then to the default, if not defined on the query string).  Alternative to `id`.</td>
+    <td>A JSON array of objects in which each object has a required <code>uri</code> property along with (optionally) any of the other properties defined on this API except <code>mode</code>. Any property not defined for an individual image will fall back to the value defined for the request (and then to the default, if not defined on the query string). The <code>uri</code> property may include URI without a scheme if <code>source</code> property is provided.</td>
   </tr><tr>
     <td><code>width</code></td>
     <td>Querystring, imageset</td>
@@ -102,19 +103,19 @@ The service stores cached copies of images as retrieved from origin.  Cached cop
 
 Fetch flags of European countries at 40x30px as a CSS sprite
 
-    http://<host>/v1/images/css-sprite?format=png&width=40&height=30&sourcetype=flags&id=gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se
+    /v1/images/css-sprite/gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se?format=png&width=40&height=30&source=flags
 
 Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
-	http://<host>/v1/images/raw/heads:john.gapper?width=50
+	/v1/images/raw/heads:john.gapper?width=50
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
-	http://<host>/v1/images/data-utfhack?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&format=jpg
+	/v1/images/data-utfhack?source=ftcms&imageset=[{"uri":"48c9d290-874b-11e3-baa7-0800200c9a66"},{"uri":"48c9d291-874b-11e3-baa7-0800200c9a66"}]&format=jpg
 
 Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs in JSON array in one request
 
-    http://<host>/v1/images/data?fit=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
+    /v1/images/data?fit=cover&source=flags&imageset=[{"uri":"gb"},{"uri":"fr"},{"uri":"heads:john.gapper","width":50,"height":50},{"uri":"ftcms:48c9d290-874b-11e3-baa7-0800200c9a66"}]
 
 ## Restricting use to FT sites
 
