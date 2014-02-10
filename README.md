@@ -47,16 +47,16 @@ Fetch an image or set of images, format and serve them.
     <td>Querystring, imageset</td>
     <td>Height of desired output image in pixels.  Defaults to a height that maintains the aspect of the image, or the height of the source image if `width` is also not set.</td>
   </tr><tr>
-    <td><code>cropmode</code></td>
+    <td><code>fit</code></td>
     <td>Querystring, imageset</td>
     <td>
-    	Type of transform to apply if the source aspect ratio does not perfectly match the target (subset of rules defined by CSS <code>background-size</code> property):
-    	<ul>
-    		<li><strong>cover</strong> (default): The image should be scaled to be as small as possible while ensuring both its dimensions are greater than or equal to the corresponding dimensions of the frame, and any cropping should be taken equally from both ends of the overflowing dimension</li>
-    		<li><strong>fit</strong>: The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame.  Any space in the frame not occupied by the image should be transparent.</li>
-            <li><strong>constrain</strong>: The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame.  The frame should then be collapsed to match the aspect ratio of the image.</li>
-    		<li><strong>stretch</strong>: The image should be scaled so that both its dimensions exactly match the frame, regardless of its original aspect ratio.</li>
-    	</ul>
+    	Type of transform to apply if the source aspect ratio does not perfectly match the target (subset of rules defined by CSS <a href="http://www.w3.org/TR/css3-images/#the-object-fit">`object-fit` property</a>):
+    	<dl>
+            <dt>cover (default)</dt><dd> The image should be scaled to be as small as possible while ensuring both its dimensions are greater than or equal to the corresponding dimensions of the frame, and any cropping should be taken equally from both ends of the overflowing dimension</dd>
+            <dt>contain</dt><dd> The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame. The frame should then be collapsed to match the aspect ratio of the image.</dd>
+    		<dt>contain-padded</dt><dd> The image should be scaled to be as large as possible while ensuring both its dimensions are less than or equal to the corresponding dimensions of the frame. Any space in the frame not occupied by the image should be transparent or filled with `bgcolor`.</dd>
+    		<dt>fill</dt><dd> The image should be scaled so that both its dimensions exactly match the frame, regardless of its original aspect ratio.</dd>
+    	</dl>
     </td>
   </tr><tr>
     <td><code>bgcolor</code></td>
@@ -114,7 +114,7 @@ Download a set of images for the web app based on their UUIDs, ready-encoded usi
 
 Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs in JSON array in one request
 
-    http://<host>/v1/images?opmode=datacropmode=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
+    http://<host>/v1/images?opmode=data&fit=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
 
 ## Restricting use to FT sites
 
