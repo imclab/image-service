@@ -8,7 +8,7 @@ Image resizing proxy for FT responsive images.
 
 API endpoints as follows:
 
-### GET /v1/images/`:sourcetype`/`:id`
+### GET /v1/images/`:mode`
 
 Fetch an image or set of images, format and serve them.
 
@@ -16,8 +16,20 @@ Fetch an image or set of images, format and serve them.
   <tr>
     <th>Param</th><th>Where</th><th>Description</th>
   </tr><tr>
+    <td><code>mode</code></td>
+    <td>URL</td>
+    <td>
+        How output should be packaged.
+        <dl>
+            <dt>raw</dt><dd> Output raw image data.  Requests for multiple images must will be output as a sprite in which the images are tiled in a single horizontal line. Per-image `format` override not available for this output mode (because you can't output an image that is part PNG, part JPEG!)</dd>
+            <dt>css-sprite</dt><dd> Output a CSS spritesheet containing the images as data URIs attached to classes with names matching the input identifiers (as closely as possible)</dd>
+            <dt>data</dt><dd> Output a JSON array of data URIs</dd>
+            <dt>data-utfhack</dt><dd> Output a JSON array of data URIs, in which each character of the base64 is a UTF character hiding two ASCII characters</dd>
+        </dl>
+    </td>
+  </tr><tr>
     <td><code>sourcetype</code></td>
-    <td>Querystring, URL, imageset</td>
+    <td>Querystring, imageset</td>
     <td>
 	    Type of source.  <code>imageset</code> is a list of URL encoded, comma delimited identifiers that make sense in the <code>sourcetype</code> namespace.  Allows the service to back onto a variety of data sources, including sets of images that may be built into the service itself.  Suggested source types:
 	    <ul>
@@ -32,12 +44,12 @@ Fetch an image or set of images, format and serve them.
 	</td>
   </tr><tr>
     <td><code>id</code></td>
-    <td>Querystring, URL, imageset</td>
     <td>A comma-separated list of URL encoded identifers that make sense in the context of the `sourcetype`.  Alternative to `imageset`.</td>
+    <td>A comma-separated list of URL encoded identifers that make sense in the context of the `source`.  Alternative to `imageset`.</td>
   </tr><tr>
     <td><code>imageset</code></td>
     <td>Querystring</td>
-    <td>A JSON array of JSON objects in which each object has a required `id` property along with (optionally) any of the other properties defined on this API except `opmode` (which must have a single value that applies to the whole request).  Any property not defined for an individual image will revert to the value defined for the request (and then to the default, if not defined on the query string).  Alternative to `id`.</td>
+    <td>A JSON array of JSON objects in which each object has a required `id` property along with (optionally) any of the other properties defined on this API except `mode` (which must have a single value that applies to the whole request).  Any property not defined for an individual image will revert to the value defined for the request (and then to the default, if not defined on the query string).  Alternative to `id`.</td>
   </tr><tr>
     <td><code>width</code></td>
     <td>Querystring, imageset</td>
@@ -79,18 +91,6 @@ Fetch an image or set of images, format and serve them.
     <td><code>quality</code></td>
     <td>Querystring, imageset</td>
     <td>Compression level for lossy encoding.  May be set to 'lowest', 'low', 'medium', 'high', 'highest', or 'lossless'. If lossless is not supported by chosen image format (JPG), the highest level will be used instead.  Default is medium.</td>
-  </tr><tr>
-    <td><code>opmode</code></td>
-    <td>Querystring</td>
-    <td>
-    	How output should be packaged.
-    	<ul>
-    		<li><strong>raw</strong> (default): Output raw image data.  Requests for multiple images must will be output as a sprite in which the images are tiled in a single horizontal line. Per-image `format` override not available for this output mode (because you can't output an image that is part PNG, part JPEG!)</li>
-    		<li><strong>css-sprite</strong>: Output a CSS spritesheet containing the images as data URIs attached to classes with names matching the input identifiers (as closely as possible)</li>
-    		<li><strong>data</strong>: Output a JSON array of data URIs</li>
-    		<li><strong>data-utfhack</strong>: Output a JSON array of data URIs, in which each character of the base64 is a UTF character hiding two ASCII characters</li>
-    	</ul>
-    </td>
   </tr>
 </table>
 
@@ -102,19 +102,19 @@ The service stores cached copies of images as retrieved from origin.  Cached cop
 
 Fetch flags of European countries at 40x30px as a CSS sprite
 
-    http://<host>/v1/images?opmode=css-sprite&format=png&width=40&height=30&sourcetype=flags&id=gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se
+    http://<host>/v1/images/css-sprite?format=png&width=40&height=30&sourcetype=flags&id=gb,fr,de,be,es,fi,hu,it,je,lt,no,pl,se
 
 Get a headshot of John Gapper at 50px wide in auto-detected image format:
 
-	http://<host>/v1/images/heads/john.gapper?width=50
+	http://<host>/v1/images/raw/heads:john.gapper?width=50
 
 Download a set of images for the web app based on their UUIDs, ready-encoded using UTF-hack:
 
-	http://<host>/v1/images?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&format=jpg&opmode=data-utfhack
+	http://<host>/v1/images/data-utfhack?sourcetype=ftcms&id=48c9d290-874b-11e3-baa7-0800200c9a66,48c9d291-874b-11e3-baa7-0800200c9a66&format=jpg
 
 Download two flags, John Gapper's headshot, and an FTCMS image, all as data URIs in JSON array in one request
 
-    http://<host>/v1/images?opmode=data&fit=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
+    http://<host>/v1/images/data?fit=cover&imageset=[{"id":"gb"},{"id":"fr"},{"sourcetype":"heads","id":"john.gapper","width":50,"height":50},{"sourcetype":"ftcms","id":"48c9d290-874b-11e3-baa7-0800200c9a66"}]
 
 ## Restricting use to FT sites
 
