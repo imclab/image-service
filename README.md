@@ -31,7 +31,7 @@ Fetch an image or set of images, format and serve them.
   </tr><tr>
     <td><code>uri</code></td>
     <td>URL, imageset</td>
-    <td>An URL-encoded URI to use as the image source, e.g. <code>/v1/images/raw/flags:gb,http%3A%2F%2Fexample.com%2Fimage%2Ejpg</code>. Scheme part of the URI may be omitted if the <code>source</code> property is provided. Alternative to the <code>imageset</code> property.</td>
+    <td>An URL-encoded URI to use as the image source, e.g. <code>/v1/images/raw/flags%3Agb,http%3A%2F%2Fexample.com%2Fimage%2Ejpg</code>. Scheme part of the URI may be omitted if the <code>source</code> property is provided. Alternative to the <code>imageset</code> property.</td>
   </tr><tr>
     <td><code>source</code></td>
     <td>Querystring</td>
