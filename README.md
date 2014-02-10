@@ -50,7 +50,7 @@ Fetch an image or set of images, format and serve them.
   </tr><tr>
     <td><code>imageset</code></td>
     <td>Querystring</td>
-    <td>A JSON array of objects in which each object has a required <code>uri</code> property along with (optionally) any of the other properties defined on this API except <code>mode</code>. Any property not defined for an individual image will fall back to the value defined for the request (and then to the default, if not defined on the query string). The <code>uri</code> property may include URI without a scheme if <code>source</code> property is provided.</td>
+    <td>A JSON array of objects in which each object has a required <code>uri</code> property along with (optionally) other imageset-compatible properties defined on this API. Any property not defined for an individual image will fall back to the value defined for the request (and then to the default, if not defined on the query string). The <code>uri</code> property may include URI without a scheme if <code>source</code> property is provided.</td>
   </tr><tr>
     <td><code>width</code></td>
     <td>Querystring, imageset</td>
